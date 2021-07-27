@@ -4,11 +4,11 @@ import { useHistory } from 'react-router-dom';
 
 const initialValues = { username:'', password:''};
 
- function login() {
+function Login () {
      const { push } = useHistory();
      const [formValues, setFormValues] = useState(initialValues);
         const handleChanges = (e)=>{
-            setFormValues({ ...setFormValues, [e.target.name]: e.target.value});
+            setFormValues({ ...setFormValues, [e.target.name]: [e.target.value]});
         } 
 
         const handleSubmit = (e) => {
@@ -17,7 +17,7 @@ const initialValues = { username:'', password:''};
             .post("http://localhost:5000/api/login",formValues)
             .then((res)=> {
 
-               window.localStorage.setItem('token', res.data.oayload);
+               window.localStorage.setItem('token', res.data.payload);
                push("/friends");
             })
             .catch((err)=> console.log(err.message));
@@ -45,4 +45,4 @@ const initialValues = { username:'', password:''};
     )
 }
 
-export default login;
+export default Login;
